@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0f766e">
+    <meta name="description" content="WICO Cloud Home Rehabilitation System dashboard for ESP32 servo control and IR sensor counting.">
+    <title>WICO Cloud Home Rehabilitation</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="assets/icon-192.png">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="hero">
+        <div class="brand-row">
+          <img class="app-icon" src="assets/icon.svg" alt="Rehabilitation system icon">
+          <div>
+            <p class="competition">WICO World Invention Creativity Olympic</p>
+            <h1>Cloud Home Rehabilitation System</h1>
+          </div>
+        </div>
+        <div class="status-pill" id="connectionStatus" aria-live="polite">Disconnected</div>
+      </header>
+
+      <section class="session-panel" aria-label="Rehabilitation session">
+        <div class="timer-block">
+          <span class="label">Operation Time</span>
+          <strong id="timerDisplay">00:00.0</strong>
+        </div>
+        <div class="session-actions">
+          <button class="primary-action" id="startButton" type="button">Start</button>
+          <button class="secondary-action" id="finishButton" type="button">Finish</button>
+        </div>
+      </section>
+
+      <section class="encouragement hidden" id="encouragementPanel" aria-live="polite">
+        <div class="badge-art" aria-hidden="true">
+          <span></span>
+        </div>
+        <div>
+          <h2>Excellent Work!</h2>
+          <p>Your rehabilitation session is complete. Keep moving forward.</p>
+        </div>
+      </section>
+
+      <section class="control-panel" aria-label="Force control">
+        <h2>Servo Force Control</h2>
+        <div class="force-grid">
+          <button class="force-button light" id="lightButton" type="button">
+            <span>Light Force</span>
+            <small>GPIO17 Servo 10 deg</small>
+          </button>
+          <button class="force-button heavy" id="heavyButton" type="button">
+            <span>Heavy Force</span>
+            <small>GPIO17 Servo 40 deg</small>
+          </button>
+        </div>
+      </section>
+
+      <section class="dashboard" aria-label="Sensor dashboard">
+        <article class="metric">
+          <span class="metric-label">IR Sensor Total</span>
+          <strong id="totalCount">0</strong>
+          <small>GPIO27 counter</small>
+        </article>
+        <article class="metric">
+          <span class="metric-label">Light Force Count</span>
+          <strong id="lightCount">0</strong>
+          <small>Repetitions</small>
+        </article>
+        <article class="metric">
+          <span class="metric-label">Heavy Force Count</span>
+          <strong id="heavyCount">0</strong>
+          <small>Repetitions</small>
+        </article>
+        <article class="metric">
+          <span class="metric-label">Current Mode</span>
+          <strong id="currentMode">Idle</strong>
+          <small id="sessionState">Session stopped</small>
+        </article>
+      </section>
+
+      <section class="mqtt-panel" aria-label="MQTT settings">
+        <div class="section-title-row">
+          <h2>MQTT Cloud Link</h2>
+          <button class="small-button" id="connectButton" type="button">Connect</button>
+        </div>
+        <label>
+          Broker WebSocket URL
+          <input id="brokerInput" type="url" value="wss://broker.emqx.io:8084/mqtt" autocomplete="off">
+        </label>
+        <label>
+          Device ID
+          <input id="deviceInput" type="text" value="wico-rehab-demo001" autocomplete="off">
+        </label>
+        <p class="topic-line">Command topic: <code id="commandTopic">wico/rehab/wico-rehab-demo001/cmd</code></p>
+        <p class="topic-line">Status topic: <code id="statusTopic">wico/rehab/wico-rehab-demo001/status</code></p>
+      </section>
+    </main>
+  </body>
+</html>
