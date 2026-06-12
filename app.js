@@ -13,7 +13,6 @@ const state = {
 };
 
 const elements = {
-  connectionStatus: document.querySelector("#connectionStatus"),
   timerDisplay: document.querySelector("#timerDisplay"),
   startButton: document.querySelector("#startButton"),
   finishButton: document.querySelector("#finishButton"),
@@ -54,10 +53,8 @@ function updateTopics() {
   elements.statusTopic.textContent = topics.status;
 }
 
-function setConnectionStatus(text, connected) {
+function setConnectionStatus(_text, connected) {
   state.connected = connected;
-  elements.connectionStatus.textContent = text;
-  elements.connectionStatus.classList.toggle("connected", connected);
   elements.connectButton.textContent = connected ? "Reconnect" : "Connect";
 }
 
