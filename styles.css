@@ -19,6 +19,7 @@
 body {
   margin: 0;
   min-height: 100vh;
+  overflow-x: hidden;
   background: linear-gradient(180deg, #eef7f3 0%, #f9fbfb 45%, #ffffff 100%);
   color: var(--ink);
   font-family: Arial, Helvetica, sans-serif;
@@ -36,7 +37,8 @@ button {
 }
 
 .app-shell {
-  width: min(100%, 760px);
+  width: 100%;
+  max-width: 760px;
   margin: 0 auto;
   padding: 18px 16px 28px;
 }
